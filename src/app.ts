@@ -1,11 +1,16 @@
-import express, { Request, Response } from 'express';
+import * as usersController from '@controllers/users.controller';
+import express from 'express';
+import morgan from 'morgan';
 
 const app = express();
 
+// Express Configurations
 app.set('port', process.env.PORT || 3000);
 
-app.get('/', (req: Request, res: Response) => {
-	res.send('Hello World!');
-});
+// Middlewares
+app.use(morgan('combined'));
+
+// Endpoints
+app.get('/users', usersController.getUsers);
 
 export default app;
